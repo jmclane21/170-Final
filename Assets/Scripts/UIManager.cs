@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void ShowCredits()
-{
-    mainMenu.SetActive(false);
-    creditsPanel.SetActive(true);
-}
+    {
+        mainMenu.SetActive(false);
+        creditsPanel.SetActive(true);
+    }
 
 }
