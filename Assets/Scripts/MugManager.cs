@@ -41,7 +41,7 @@ public class MugManager : MonoBehaviour
             float throwStrength = Mathf.Min((Time.time - startHold)/2, 1);
             Debug.Log(throwStrengthSlider.value);
             Debug.Log(throwStrength);
-            MugBody.AddForce(Vector3.forward * 1000 * throwStrength);
+            MugBody.AddForce(Vector3.forward * -1000 * throwStrength);
         }
     }
 }
