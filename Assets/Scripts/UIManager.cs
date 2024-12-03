@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -17,4 +18,8 @@ public class UIManager : MonoBehaviour
         creditsPanel.SetActive(true);
     }
 
+    public void StartBarScene()
+    {
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    }
 }
