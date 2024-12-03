@@ -35,6 +35,7 @@ public class CustomerManager : MonoBehaviour
             spawnCustomer();
         }
     }
+    
     public void spawnCustomer() {
         Destroy(currentHand);
         currentHand = Instantiate(handPrefab);

@@ -30,4 +30,15 @@ public class Customer : MonoBehaviour
         CustomerManager.Instance.spawnCustomer();
         MugManager.Instance.spawnMug();
     }
+
+    private void OnTriggerStay(Collider other) {
+        //determine success of throw
+        if (other.gameObject.GetComponent<Rigidbody>().IsSleeping()) {
+            Debug.Log("succeed");
+
+            //spawn new customer and mug at end
+            CustomerManager.Instance.spawnCustomer();
+            MugManager.Instance.spawnMug();
+        }
+    }
 }
