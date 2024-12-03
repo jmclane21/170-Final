@@ -12,6 +12,7 @@ public class MugManager : MonoBehaviour
     public GameObject mugPrefab;
     GameObject currentMug;
     Rigidbody mugBody;
+    bool mugThrown;
     public Slider throwStrengthSlider;
 
     float startHold;
@@ -28,14 +29,20 @@ public class MugManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mugThrown = false;
         spawnMug();
     }
 
     // Update is called once per frame
     void Update()
     {
-        handleClick();
-        //unpair current mug and spawn next one when velocity = 0 OR falls off side?
+        if (!mugThrown) {
+            handleClick();
+        }
+        else
+        {
+            checkAtRest();
+        }
     }
 
     void handleClick()
@@ -56,14 +63,25 @@ public class MugManager : MonoBehaviour
             float throwStrength = Mathf.Min((Time.time - startHold)/2, 1f) +.5f;
             Debug.Log(throwStrength);
             mugBody.AddForce(Vector3.forward * -1750 * throwStrength);
-            
+            mugThrown = true;
         }
     }
     public void spawnMug()
     {
+        throwStrengthSlider.value = 0;
         Destroy(currentMug);
         currentMug = Instantiate(mugPrefab);
         currentMug.transform.position = mugSpawn.position;
         mugBody = currentMug.GetComponent<Rigidbody>();
+        mugThrown = false;
+    }
+
+    void checkAtRest()
+    {
+        if (mugBody.IsSleeping())
+        {
+            Debug.Log("underthrow, try again");
+            spawnMug();
+        }
     }
 }
