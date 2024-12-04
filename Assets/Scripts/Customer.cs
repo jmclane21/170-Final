@@ -18,17 +18,18 @@ public class Customer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //determine success of throw
-        Debug.Log(collision.relativeVelocity.magnitude);
-        //magic number is the amount of force the mug can hit the customer with
-        if(collision.relativeVelocity.magnitude < 17)
-        {
-            Debug.Log("succeed");
-        }
+        ////determine success of throw
+        //Debug.Log(collision.relativeVelocity.magnitude);
+        ////magic number is the amount of force the mug can hit the customer with
+        //if (collision.relativeVelocity.magnitude < 17)
+        //{
+        //    Debug.Log("succeed");
+        //}
+        //collision.gameObject.GetComponent<Rigidbody>().AddExplosionForce(1000, collision.gameObject.transform.position, .3f); ;
 
         //spawn new customer and mug at end
-        CustomerManager.Instance.spawnCustomer();
-        MugManager.Instance.spawnMug();
+        //CustomerManager.Instance.spawnCustomer();
+        //MugManager.Instance.spawnMug();
     }
 
     private void OnTriggerStay(Collider other) {

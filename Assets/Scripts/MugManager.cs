@@ -55,14 +55,13 @@ public class MugManager : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            throwStrengthSlider.value = (Time.time - startHold)/2 + .5f;
+            throwStrengthSlider.value = (Time.time - startHold)/3 + .25f;
         }
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            float throwStrength = Mathf.Min((Time.time - startHold)/2, 1f) +.5f;
-            Debug.Log(throwStrength);
-            mugBody.AddForce(Vector3.forward * -1750 * throwStrength);
+            float throwStrength = Mathf.Min((Time.time - startHold)/3, 1f) +.25f;
+            mugBody.AddForce(Vector3.forward * -2750 * throwStrength);
             mugThrown = true;
         }
     }
@@ -80,7 +79,7 @@ public class MugManager : MonoBehaviour
     {
         if (mugBody.IsSleeping())
         {
-            Debug.Log("underthrow, try again");
+            Debug.Log("under/overthrow, try again");
             spawnMug();
         }
     }
