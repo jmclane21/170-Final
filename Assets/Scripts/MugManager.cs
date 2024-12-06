@@ -15,6 +15,8 @@ public class MugManager : MonoBehaviour
     bool mugThrown;
     public Slider throwStrengthSlider;
 
+    [SerializeField] AudioClip failSound;
+
     float startHold;
     void Awake()
     {
@@ -80,6 +82,7 @@ public class MugManager : MonoBehaviour
         if (mugBody.IsSleeping())
         {
             Debug.Log("under/overthrow, try again");
+            AudioManager.Instance.playSound(failSound);
             spawnMug();
         }
     }
