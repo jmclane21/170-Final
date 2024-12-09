@@ -4,41 +4,55 @@ using UnityEngine;
 
 public class RagManager : MonoBehaviour
 {
-    public Rigidbody RagBody;
+    public Transform RagBody;
 
-    public float speed = .1f;
+    public float speed = 100f;
 
     private Vector3 initialMousePos;
-    private float initialRigidbodyPos;
+    private float initialRigidbodyPosZ;
+    private float initialRigidbodyPosX;
 
     void Start()
     {
-        initialRigidbodyPos = RagBody.position.x;
+        initialRigidbodyPosZ = RagBody.position.z;
+        initialRigidbodyPosX = RagBody.position.x;
         initialMousePos = Input.mousePosition;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            initialRigidbodyPos = RagBody.position.x;
+            initialRigidbodyPosZ = RagBody.position.z;
             initialMousePos = Input.mousePosition;
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
-            float mouseDeltaX = Input.mousePosition.x - initialMousePos.x;
+            float mouseDeltaX = initialMousePos.x - Input.mousePosition.x;
+            float mouseDeltaY = Input.mousePosition.y - initialMousePos.y;
+            
+            float newZPosition = initialRigidbodyPosZ + (mouseDeltaX * speed);
+            float newXPosition = initialRigidbodyPosX + (mouseDeltaY * speed);
 
-            float newXPosition = initialRigidbodyPos + (mouseDeltaX * Time.deltaTime * speed);
-
-            if (newXPosition >= initialRigidbodyPos + .5f) {
-                newXPosition = initialRigidbodyPos + .5f;
+            if (newZPosition >= initialRigidbodyPosZ + 50f) {
+                newZPosition = initialRigidbodyPosZ + 50f;
             }
 
-            if (newXPosition <= initialRigidbodyPos - .5f) {
-                newXPosition = initialRigidbodyPos - .5f;
+            if (newZPosition <= initialRigidbodyPosZ - 50f) {
+                newZPosition = initialRigidbodyPosZ - 50f;
             }
 
-            RagBody.MovePosition(new Vector3(newXPosition, RagBody.position.y, RagBody.position.z));
+            if (newXPosition >= initialRigidbodyPosX + 10f)
+            {
+                newXPosition = initialRigidbodyPosX + 10f;
+            }
+
+            if (newXPosition <= initialRigidbodyPosX- 10f)
+            {
+                newXPosition = initialRigidbodyPosX - 10f;
+            }
+
+            RagBody.position = (new Vector3(newXPosition, RagBody.position.y, newZPosition));
         }
     }
 }
